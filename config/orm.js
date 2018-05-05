@@ -23,7 +23,7 @@ function objToSql(ob) {
     return arr.toString();
   }
 
-
+//ORM
 var orm = {
     //Selects all the data from the burgers table
     selectAll: function(burgersTable, callback) {
@@ -49,6 +49,7 @@ var orm = {
                 callback(res);
             });
     },
+    //updates the burger when eaten
     updateOne: function(objColVals, condition, callback) {
 
         console.log("col in sql " + objToSql(objColVals));
