@@ -1,13 +1,15 @@
 var connection = require("../config/connection");
 
 var orm = {
-    selectAll: function(burgersTable) {
+    selectAll: function(burgersTable, callback) {
         var queryString = "SELECT * FROM ??" ;
         console.log(queryString);
 
         connection.query(queryString, [burgersTable], function(err, result) {
-            if (err) throw err;
-            console.log(result);
+            if (err) {
+                throw err;
+              }
+            callback(result);
         });
     },
     insertOne: function(newBurger, callback) {
@@ -21,12 +23,12 @@ var orm = {
             });
     },
     updateOne: function(burgerId, devoured, callback) {
+
         var queryString = "UPDATE burgers SET devoured=? WHERE id=?";
         console.log(queryString);
 
-        devoured = parseInt(devoured);
-        burgerId = parseInt(burgerId);
-        
+       // devoured = parseInt(devoured);
+       // burgerId = parseInt(burgerId);
         connection.query(queryString, [devoured, burgerId], function (err, res) {
             if (err) throw err;
             console.log(burgerId + " devoured: " + devoured);
