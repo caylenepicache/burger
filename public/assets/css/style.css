@@ -1,19 +1,10 @@
-li {
-  padding: 5px;
-  margin: 5px;
-  background: #faebd7;
+body {
+  background-image: url("../images/toa-heftiba-581904-unsplash.jpg") !important;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-.label {
-  font-weight: bold;
-}
-
-.create-update-form {
-  padding: 5px;
-  margin: 5px;
-  background: aqua;
-}
-
-.form-group {
-  margin-bottom: 5px;
+#eatheader, .text-danger {
+  font-family:'Titan One', cursive;
 }
