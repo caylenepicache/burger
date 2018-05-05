@@ -1,6 +1,7 @@
 var connection = require("../config/connection");
 
 var orm = {
+    //Selects all the data from the burgers table
     selectAll: function(burgersTable, callback) {
         var queryString = "SELECT * FROM ??" ;
         console.log(queryString);
@@ -12,26 +13,37 @@ var orm = {
             callback(result);
         });
     },
+
+    //inserts a burger to the database and updates
     insertOne: function(newBurger, callback) {
-        var queryString = "INSERT INTO burgers (burger_name, devoured) VALUES ?";
+        var queryString = "INSERT INTO burgers SET ?";
         console.log(queryString);
 
-        connection.query(queryString, newBurger, function (err, res) {
+        connection.query(queryString, {burger_name: newBurger.burger_name, devoured: false}, function (err, res) {
                 if (err) throw err;
-                console.log(res.body.burger_name + " inserted...");
+                //console.log(res);
                 callback(res);
             });
     },
-    updateOne: function(burgerId, devoured, callback) {
+    updateOne: function(devoured, condition, callback) {
 
-        var queryString = "UPDATE burgers SET devoured=? WHERE id=?";
+        //devoured = 1;
+
+        var queryString = "UPDATE burgers SET devoured=true WHERE ?";
         console.log(queryString);
+        console.log("devoured:" + JSON.stringify(devoured));
+        console.log("Burger ID: " + condition)
 
-       // devoured = parseInt(devoured);
-       // burgerId = parseInt(burgerId);
-        connection.query(queryString, [devoured, burgerId], function (err, res) {
+
+
+        //devoured = true;
+        burgerId = JSON.stringify(condition);
+        console.log("Parsed Burger ID: " + condition)
+        
+
+        connection.query(queryString, [devoured, condition], function (err, res) {
             if (err) throw err;
-            console.log(burgerId + " devoured: " + devoured);
+            console.log(condition + " **devoured: " + devoured);
             callback(res);
         });
     }

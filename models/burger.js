@@ -16,8 +16,8 @@ var burger = {
       callback(res);
     });
   },
-  update: function(burgerId, devoured, callback) {
-    orm.updateOne(burgerId, devoured, function(res) {
+  update: function(burgerId, condition, callback) {
+    orm.updateOne(burgerId, condition, function(res) {
       callback(res);
     });
   }

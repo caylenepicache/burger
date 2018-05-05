@@ -32,10 +32,10 @@ var newBurger = {
   });
 });
 
-router.put("/api/burgers/:id", function(req, res) {
+router.post("/api/burgers/:id", function(req, res) {
   var condition = "id = " + req.params.id;
 
-  console.log("condition ", condition);
+  console.log("condition", condition);
 
   burger.update(
     {
