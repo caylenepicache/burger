@@ -51,10 +51,10 @@ var orm = {
     },
     updateOne: function(objColVals, condition, callback) {
 
-        console.log(objToSql(objColVals));
-        console.log(objColVals);
+        console.log("col in sql " + objToSql(objColVals));
+        //console.log("objcolvals " + objColVals);
 
-        var queryString = "UPDATE burgers SET devoured = true WHERE " + condition;
+        var queryString = "UPDATE burgers SET " + objToSql(objColVals) + " WHERE " + condition;
         console.log(queryString);
         //console.log("devoured:" + devoured);
         console.log("Burger ID: " + condition)

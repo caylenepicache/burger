@@ -17,6 +17,7 @@ router.get("/", function(req, res) {
 });
 
 
+
 router.post("/api/burgers", function(req, res) {
   console.log(req.body.burger_name);
 
@@ -32,10 +33,12 @@ var newBurger = {
   });
 });
 
-router.post("/api/burgers/:id", function(req, res) {
+//PUT
+router.put("/api/burgers/:id", function(req, res) {
   var condition = "id = " + req.params.id;
 
   console.log("condition", condition);
+  console.log("the condition" + req.body.devoured);
 
   burger.update({
       devoured: req.body.devoured
@@ -49,6 +52,8 @@ router.post("/api/burgers/:id", function(req, res) {
     }
   );
 });
+
+
 
 // Export routes for server.js to use.
 module.exports = router;

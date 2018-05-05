@@ -18,8 +18,8 @@ var burger = {
       callback(res);
     });
   },
-  update: function(devoured, condition, callback) {
-    orm.updateOne(devoured, condition, function(res) {
+  update: function(objColVals, condition, callback) {
+    orm.updateOne(objColVals, condition, function(res) {
       callback(res);
     });
   }
