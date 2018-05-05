@@ -1,4 +1,4 @@
-USE burgers_db;
+USE kimk7p1v8cuj2kpz;
 
 INSERT INTO burgers (burger_name, devoured)
 VALUES ("Cheeseburger", false),
@@ -8,4 +8,4 @@ VALUES ("Cheeseburger", false),
 ("Tofu Burger", true);
 
 
-SELECT * FROM burgers_db.burgers;
+SELECT * FROM kimk7p1v8cuj2kpz.burgers;
