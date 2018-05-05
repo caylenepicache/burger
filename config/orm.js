@@ -1,5 +1,29 @@
 var connection = require("../config/connection");
 
+
+function objToSql(ob) {
+    var arr = [];
+  
+    // loop through the keys and push the key/value as a string int arr
+    for (var key in ob) {
+      var value = ob[key];
+      // check to skip hidden properties
+      if (Object.hasOwnProperty.call(ob, key)) {
+        // if string with spaces, add quotations (Lana Del Grey => 'Lana Del Grey')
+        if (typeof value === "string" && value.indexOf(" ") >= 0) {
+          value = "'" + value + "'";
+        }
+        // e.g. {name: 'Lana Del Grey'} => ["name='Lana Del Grey'"]
+        // e.g. {sleepy: true} => ["sleepy=true"]
+        arr.push(key + "=" + value);
+      }
+    }
+  
+    // translate array of strings to a single comma-separated string
+    return arr.toString();
+  }
+
+
 var orm = {
     //Selects all the data from the burgers table
     selectAll: function(burgersTable, callback) {
@@ -25,25 +49,23 @@ var orm = {
                 callback(res);
             });
     },
-    updateOne: function(devoured, condition, callback) {
+    updateOne: function(objColVals, condition, callback) {
 
-        //devoured = 1;
+        console.log(objToSql(objColVals));
+        console.log(objColVals);
 
-        var queryString = "UPDATE burgers SET devoured=true WHERE ?";
+        var queryString = "UPDATE burgers SET devoured = true WHERE " + condition;
         console.log(queryString);
-        console.log("devoured:" + JSON.stringify(devoured));
+        //console.log("devoured:" + devoured);
         console.log("Burger ID: " + condition)
 
 
+        //burgerId = JSON.stringify(condition);
+        //console.log("Parsed Burger ID: " + condition)
 
-        //devoured = true;
-        burgerId = JSON.stringify(condition);
-        console.log("Parsed Burger ID: " + condition)
-        
-
-        connection.query(queryString, [devoured, condition], function (err, res) {
+        connection.query(queryString, function (err, res) {
             if (err) throw err;
-            console.log(condition + " **devoured: " + devoured);
+            //console.log(burgerId + " devoured: " + devoured);
             callback(res);
         });
     }

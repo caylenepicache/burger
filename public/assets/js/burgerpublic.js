@@ -2,19 +2,19 @@
 $(function() {
   $(".change-eaten").on("click", function(event) {
     var id = $(this).data("id");
-    var isEaten = $(this).data("newdevour");
+    //var isEaten = $(this).data("newdevour");
 
     var newDevourState = {
-      devoured: isEaten
+      devoured: true
     };
 
     // Send the PUT request.
-    $.ajax("/api/burgers/" + id, {
+    $.ajax("/api/burgers/:" + id, {
       type: "PUT",
       data: newDevourState
     }).then(
       function() {
-        console.log("changed burger to", isEaten);
+        console.log("changed burger to new state");
         // Reload the page to get the updated list
         location.reload();
       }
@@ -26,7 +26,8 @@ $(function() {
     event.preventDefault();
 
     var newBurger = {
-      burger_name: $("#burgerInput").val().trim()
+      burger_name: $("#burgerInput").val().trim(),
+      devoured: false
     };
 
     // Send the POST request.
@@ -36,21 +37,6 @@ $(function() {
     }).then(
       function() {
         console.log("created new burger");
-        // Reload the page to get the updated list
-        location.reload();
-      }
-    );
-  });
-
-  $(".delete-burger").on("click", function(event) {
-    var id = $(this).data("id");
-
-    // Send the DELETE request.
-    $.ajax("/api/burgers/" + id, {
-      type: "DELETE"
-    }).then(
-      function() {
-        console.log("deleted burger", id);
         // Reload the page to get the updated list
         location.reload();
       }
