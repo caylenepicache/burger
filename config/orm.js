@@ -55,7 +55,7 @@ var orm = {
         console.log("col in sql " + objToSql(objColVals));
         //console.log("objcolvals " + objColVals);
 
-        var queryString = "UPDATE burgers SET " + objToSql(objColVals) + " WHERE " + condition;
+        var queryString = "UPDATE burgers SET devoured = !devoured" /* + objToSql(objColVals) */ + " WHERE " + condition;
         console.log(queryString);
         //console.log("devoured:" + devoured);
         console.log("Burger ID: " + condition)
